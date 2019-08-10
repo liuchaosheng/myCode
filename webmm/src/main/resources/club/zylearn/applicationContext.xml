@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://www.springframework.org/schema/beans"     
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	 http://www.springframework.org/schema/aop
+	 http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+	 http://www.springframework.org/schema/context
+	 http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	 http://www.springframework.org/schema/tx
+	 http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- 配置注解 -->
+	<context:annotation-config />
+	<context:component-scan base-package="club.zylearn" />
+	<!-- 
+		xmlns或者xmlns:xx中定义的命名空间下面的xsi:schemaLocaltion都要为其匹配对应的位置
+	-->
+	
+	<bean name="session"  factory-bean="mySqlSessionFactory" factory-method="getSqlSession" scope="prototype">
+		
+	</bean>
+	
+	<!-- aop基础配置 -->
+	<!-- <aop:config>
+		使用aspectJ表达式语法来定义切入点 
+		<aop:pointcut expression="execution(* club.zylearn.springdemo.springdemo1.service..*.*(..))" id="defaultPointCut" />
+		定义方法调用的配置
+		<aop:aspect ref="serviceProxy">
+			<aop:before method="before" pointcut-ref="defaultPointCut" />
+			<aop:after method="after" pointcut-ref="defaultPointCut" />
+		</aop:aspect>
+	</aop:config> -->
+	
+</beans>

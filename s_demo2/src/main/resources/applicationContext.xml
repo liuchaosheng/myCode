@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean name="person1" class="club.zylearn.maven.springdemo.s_demo1.vo.Person">
+		<property name="pid" value="001"></property>
+		<property name="name" value="小明"></property>
+		<property name="age" value="30"></property>
+		<!-- <property name="birthday" value="1990-10-04"></property> -->
+		<property name="sal" value="3000.0"></property>
+	</bean>
+	
+	<bean name="person2" class="club.zylearn.maven.springdemo.s_demo1.vo.Person">
+		<property name="pid" value="002"></property>
+		<property name="name" value="朝阳"></property>
+		<property name="age" value="30"></property>
+		<!-- <property name="birthday" value="1990-10-20"></property> -->
+		<property name="sal" value="6000.0"></property>
+	</bean>
+	
+	<bean name="car1" class="club.zylearn.maven.springdemo.s_demo1.vo.Car">
+		<property name="cid" value="1001"></property>
+		<property name="cname" value="宝马3系"></property>
+		<property name="speed" value="250.0"></property>
+		<property name="person" ref="person1"></property>
+	</bean>	
+	
+	<bean name="book1" class="club.zylearn.maven.springdemo.s_demo1.vo.Book">
+		<property name="bid" value="100001"></property>
+		<property name="title" value="java实战经典"></property>
+		<property name="price" value="99.8"></property>
+		<property name="content">
+			<array>
+				<value>java的发展历程</value>
+				<value>java环境搭建</value>
+				<value>java作用</value>
+				<value>java的开发框架</value>
+			</array>
+		</property>
+	</bean>
+	
+	<bean name="com1" class="club.zylearn.maven.springdemo.s_demo1.vo.Company">
+		<property name="address" value="南京市软件大道168号"></property>
+		<property name="cname" value="中软国际"></property>
+		<property name="persons">
+			<list>
+				<ref bean="person1"/>
+				<ref bean="person2"/>
+			</list>
+		</property>
+	</bean>
+	
+</beans>

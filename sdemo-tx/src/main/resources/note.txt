@@ -1,0 +1,38 @@
+spring的核心包：
+core/context/bean/expression
+
+aop:
+aop/aspects/aspectjweaver
+
+切面通知的执行顺序：
+前置
+后置
+后置返回或者后置异常
+如果用来进行手工事务控制的话
+
+前置用于打开数据库开启事务
+后置貌似没有什么用
+后置返回用于逻辑判断是否提交事务，并关闭数据库
+后置异常用于回滚事务并关闭事务
+
+亲自测试（可以使用ThreadLocal类来管理数据库的线程独立回话，但是一定要及时
+清除线程独立回话，否则一个线程中无法调用多个业务流程）
+
+
+该项目使用了spring的声明式事务
+其中配置的事务管理器是DataSourceTransactionManager
+spring的声明式事务管理的基本流程是调用TransactionManager接口的getTransaction()接口开启事务
+然后根据是否产生异常来判断是调用TransactionManage.commit()方法还是TransactionManager.rollback()方法
+而每个持久层的框架要使用其声明式事务管理则需要实现该接口然后将事务管理交给spring来做。
+当然spring自己实现了一个DataSourceTransactionManager事务管理器来对使用DataSource编程的持久层进行事务管理。
+此时我们在使用DataSource的持久层就需要通过类似于下面的代码来取得线程独有的数据源的连接在进行数据库的相应操作。
+public Connection getSpringTransactionConnection() {
+	ConnectionHolder ch = (ConnectionHolder)TransactionSynchronizationManager.getResource(dataSource) ;
+	Connection conn = ch.getConnection() ;
+	return conn ;
+}
+总结：所以其声明式事务的实现关键还是使用了ThreadLocal类来保存线程独有的数据库会话对象供持久层的程序使用。
+（但是其并不能判断数据层的返回值是否正确来提交或者回滚）,而且默认其在捕获RuntimeException的时候才回滚。
+
+
+

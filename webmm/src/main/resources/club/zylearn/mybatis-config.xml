@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 引入外部配置文件 在类路径下引用-->
+  <properties resource="club/zylearn/mybatis-config.properties">
+  </properties>
+  
+  <settings>
+  	<setting name="jdbcTypeForNull" value="NULL"/>
+  </settings>
+  
+  <environments default="dev_mysql">
+  	<!--  配置mysql环境-->
+    <environment id="dev_mysql">
+      <!--  配置事务处理方式-->
+      <transactionManager type="JDBC"/>
+      
+      <!--  配置数据源 -->
+      <dataSource type="POOLED">
+        <property name="driver" value="${mysql.dbdriver}"/>
+        <property name="url" value="${mysql.dburl}"/>
+        <property name="username" value="${mysql.dbuser}"/>
+        <property name="password" value="${mysql.password}"/>
+      </dataSource>
+    </environment>
+    
+    <!--  配置oracle环境-->
+    <environment id="dev_oracle">
+      <!--  配置事务处理方式-->
+      <transactionManager type="JDBC"/>
+      
+      <!--  配置数据源 -->
+      <dataSource type="POOLED">
+        <property name="driver" value="${oracle.dbdriver}"/>
+        <property name="url" value="${oracle.dburl}"/>
+        <property name="username" value="${oracle.dbuser}"/>
+        <property name="password" value="${oracle.password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <!-- 多数据库的支持 因为原生的JDBC操作中可以根据metadata获得数据库厂商的标识--> 
+  <databaseIdProvider type="DB_VENDOR">  
+  	<property name="MySQL" value="mysql"/>  <!-- 前面的属性是数据库厂商的标识 后面的是别名 -->
+  	<property name="Oracle" value="oracle"/>
+  	<property name="SQL Server" value="sqlserver"/>
+  </databaseIdProvider>   <!--  在sql映射文件中将标签的databaseId进行制定从而达到让mybatis根据当前运行环境来决定执行哪条sql语句 -->
+  
+  <!-- 使用包的方式来进行sql的映射 -->
+  <mappers>
+  	<package name="club.zylearn.maven.persondemo.webmm.dao" />
+  </mappers>
+  
+</configuration>
