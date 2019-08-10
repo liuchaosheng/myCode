@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 配置多个环境信息 -->
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <!-- 使用了c3p0连接池就需要在使用 -->
+      <dataSource type="club.zylearn.maven.mybatisdemo.mybatis_datasource.datasource.MyDatasourceProvider">
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/demo"/>
+        <property name="user" value="root"/>
+        <property name="password" value="root"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+   	<package name="club.zylearn.maven.mybatisdemo.mybatis_datasource.dao"/>
+  </mappers>
+</configuration>

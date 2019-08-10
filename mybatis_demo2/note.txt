@@ -1,0 +1,7 @@
+该项目演示了mybatis的接口映射编程的示例
+
+// 将sql映射使用包的方式来管理，那么mybatis会自动将某个接口跟
+// 其同名的xml文件进行关联
+<mappers>
+   <package name="club.zylearn.maven.mybatisdemo.mybatis_demo2.dao"/>
+</mappers>

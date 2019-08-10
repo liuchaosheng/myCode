@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="club.zylearn.maven.mybatisdemo.mybatis_datasource.dao.IPersonDAO">
+   <!-- public boolean doCreate(Person vo) throws Exception; -->
+   <insert id="doCreate" useGeneratedKeys="true" keyProperty="pid">
+   	insert into person(name,age,sal,birthday) values(#{name},#{age},#{sal},#{birthday})
+   </insert>
+   
+   <!-- public boolean doRemove(Integer id) throws Exception ; -->
+   <delete id="doRemove">
+   	delete from person where pid=#{pid}
+   </delete>
+   
+   <!--public boolean doUpdate(Person vo) throws Exception ;  -->
+   <update id="doUpdate">
+   	update person set name=#{name},age=#{age},sal=#{sal},birthday=#{birthday} where pid=#{pid}
+   </update>
+   
+   <!-- public Person findById(Integer id) throws Exception ; -->
+   <select id="findById" resultType="club.zylearn.maven.mybatisdemo.mybatis_datasource.vo.Person">
+   	select pid,name,age,sal,birthday from person where pid=#{pid}
+   </select>
+   
+   <!--public List<Person> findAll() throws Exception ;  -->
+    <select id="findAll" resultType="club.zylearn.maven.mybatisdemo.mybatis_datasource.vo.Person">
+   	select pid,name,age,sal,birthday from person
+   </select>
+</mapper>
