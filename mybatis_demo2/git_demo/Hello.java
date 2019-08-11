@@ -9,4 +9,5 @@ public class Hello{
 	public static int add(int data1,int data2){
 		return data1 + data2 ;
 	}
+	// user2增加了一行注释
 }
