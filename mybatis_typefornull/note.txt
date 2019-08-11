@@ -17,3 +17,5 @@
 2、在全局中设置setting jdbcTypeForNull
 <setting name="jdbcTypeForNull" value="NULL"/>
 
+user2增加的一行
+
