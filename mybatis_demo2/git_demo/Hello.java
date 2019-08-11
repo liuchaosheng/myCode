@@ -6,4 +6,7 @@ public class Hello{
 		Object obj = new java.util.Date() ;
 		print(obj) ;
 	}
+	public static int add(int data1,int data2){
+		return data1 + data2 ;
+	}
 }
