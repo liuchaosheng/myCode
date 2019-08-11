@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="club.zylearn.maven.mybatisdemo.mybatis_typefornull.dao.IPersonDAO">
+   <!-- public boolean doCreate(Person vo) throws Exception; -->
+   <insert id="doCreate" useGeneratedKeys="true" keyProperty="pid" databaseId="mysql">
+   	insert into person(name,age,sal,birthday) values(#{name},#{age},#{sal},#{birthday})
+   </insert>
+   
+   <insert id="doCreate"  databaseId="oracle">
+   	insert into person(pid,pname,age,salary,birthday) values(person_seq.nextval,#{name},#{age,jdbcType=NULL},#{sal},#{birthday})
+   	 <selectKey keyProperty="pid" order="AFTER" resultType="Integer">
+   	 	select person_seq.currval from dual
+   	 </selectKey>
+   </insert>
+   
+   <!-- public boolean doRemove(Integer id) throws Exception ; -->
+   <delete id="doRemove">
+   	delete from person where pid=#{pid}
+   </delete>
+   
+   <!--public boolean doUpdate(Person vo) throws Exception ;  -->
+   <update id="doUpdate" databaseId="mysql">
+   	update person set name=#{name},age=#{age},sal=#{sal},birthday=#{birthday} where pid=#{pid}
+   </update>
+   
+    <update id="doUpdate" databaseId="oracle">
+   	update person set pname=#{name},age=#{age},salary=#{sal},birthday=#{birthday} where pid=#{pid}
+   </update>
+   
+   <!-- public Person findById(Integer id) throws Exception ; -->
+   <select id="findById" resultType="club.zylearn.maven.mybatisdemo.mybatis_typefornull.vo.Person" databaseId="mysql">
+   	select pid,name,age,sal,birthday from person where pid=#{pid}
+   </select>
+   
+   <select id="findById" resultType="club.zylearn.maven.mybatisdemo.mybatis_typefornull.vo.Person" databaseId="oracle">
+   	select pid,pname name,age,salary sal,birthday from person where pid=#{pid}
+   </select>
+   
+   <!--public List<Person> findAll() throws Exception ;  -->
+    <select id="findAll" resultType="club.zylearn.maven.mybatisdemo.mybatis_typefornull.vo.Person" databaseId="mysql">
+   	select pid,name,age,sal,birthday from person
+   </select>
+   <select id="findAll" resultType="club.zylearn.maven.mybatisdemo.mybatis_typefornull.vo.Person" databaseId="oracle">
+   	select pid,pname name,age,salary sal,birthday from person
+   </select>
+</mapper>

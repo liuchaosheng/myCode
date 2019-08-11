@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<!-- <settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings> -->
+	<!-- 配置多个环境信息 -->
+  <environments default="dev_oracle">
+  	<!-- mysql环境 -->
+    <environment id="dev_mysql">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/demo"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+      </dataSource>
+    </environment>
+    
+    <!-- oracle环境 -->
+    <environment id="dev_oracle">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:zylearn"/>
+        <property name="username" value="scott"/>
+        <property name="password" value="oracle"/>
+      </dataSource>
+    </environment>
+  </environments>
+  
+   <databaseIdProvider type="DB_VENDOR">  
+  	<property name="MySQL" value="mysql"/>  <!-- 前面的属性是数据库厂商的标识 后面的是别名 -->
+  	<property name="Oracle" value="oracle"/>
+  	<property name="SQL Server" value="sqlserver"/>
+  </databaseIdProvider>   <!--  在sql映射文件中将标签的databaseId进行制定从而达到让mybatis根据当前运行环境来决定执行哪条sql语句 -->
+  
+  <mappers>
+   	<package name="club.zylearn.maven.mybatisdemo.mybatis_typefornull.dao"/>
+  </mappers>
+  
+</configuration>

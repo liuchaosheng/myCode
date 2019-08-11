@@ -1,0 +1,19 @@
+该项目演示了mybatis对jdbcTypeForNull的处理
+
+
+1、默认将其设置为OTHER
+2、而oracle数据库不识别OTHER类型所以会报错
+
+解决方式有两种
+1、在使用#{}取值得时候指定jdbcType
+<insert id="doCreate"  databaseId="oracle">
+   	insert into person(pid,pname,age,salary,birthday) values(person_seq.nextval,#{name},#{age,jdbcType=NULL},#{sal},#{birthday})
+   	 <selectKey keyProperty="pid" order="AFTER" resultType="Integer">
+   	 	select person_seq.currval from dual
+   	 </selectKey>
+   </insert>
+   
+
+2、在全局中设置setting jdbcTypeForNull
+<setting name="jdbcTypeForNull" value="NULL"/>
+
