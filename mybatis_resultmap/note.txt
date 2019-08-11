@@ -1,0 +1,16 @@
+﻿该项目演示了mybatis对select的结果集封装使用resultMap标签设置映射逻辑的基本操作
+
+<!-- 为oracle定义resultMap 因为在项目中有列明跟属性名不对应 -->
+<resultMap type="club.zylearn.maven.mybatisdemo.mybatis_resultmap.vo.Person" id="personMap">
+	<id column="pid" property="pid"/>
+	<result column="pname" property="name"/>
+	<result column="salary" property="sal"/>
+	<result column="birthday" property="birthday"/>
+	<result column="age" property="age"/>
+</resultMap>
+	
+  <select id="findByIdUseResultMap" databaseId="oracle" resultMap="personMap">
+   	select * from person where pid=#{id}
+   </select>
+
+
