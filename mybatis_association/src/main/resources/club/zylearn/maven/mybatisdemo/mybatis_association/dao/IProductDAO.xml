@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="club.zylearn.maven.mybatisdemo.mybatis_association.dao.IProductDAO">
+	
+	<!--
+	public boolean doCreate(Product vo) throws Exception ;
+	public boolean doUpdateCount(Product vo) throws Exception ;
+	 -->
+	 
+	 <insert id="doCreate" useGeneratedKeys="true" keyProperty="proid">
+	 	insert into product(proname,price,count,oriprice) values(#{proname},#{price},#{count},#{oriprice})
+	 </insert>
+	 
+	 <update id="doUpdateCount">
+	 	update product set count=#{count} where proid=#{proid}
+	 </update>
+	 
+   
+</mapper>

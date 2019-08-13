@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="club.zylearn.maven.mybatisdemo.mybatis_association.dao.IOrdersDAO">
+	
+	<!--
+	public boolean doCreate(Orders vo) throws Exception ;
+	public boolean doUpdatePrice(Orders vo) throws Exception ;
+	public List<OrderDetail> findByIdDeep(Integer id) throws Exception ;
+	public List<OrderDetail> findOrderDetailsById(Integer id) throws Exception ;
+	 -->
+	 
+	 <insert id="doCreate" useGeneratedKeys="true" keyProperty="oid">
+	 	insert into orders(allprice,createtime) values(#{allprice},#{createTime})
+	 </insert>
+	 
+	 <update id="doUpdatePrice">
+	 	update orders set allprice=#{allprice} where oid=#{oid}
+	 </update>
+	 
+	 <resultMap type="club.zylearn.maven.mybatisdemo.mybatis_association.vo.Orders" id="ordersMap">
+	 	<id column="oid" property="oid"/>
+	 	<result column="allprice" property="allprice"/>
+	 	<result column="createtime" property="createTime"/>
+	 	<association property="orderDetails" select="club.zylearn.maven.mybatisdemo.mybatis_association.dao.IOrdersDAO.findOrderDetailsById" column="oid">
+	 		
+	 	</association>
+	 </resultMap>
+	 <select id="findByIdDeep" resultMap="ordersMap">
+	 	select * from orders where oid=#{oid}
+	 	
+	 </select>
+	 
+	 <select id="findOrderDetailsById" resultType="club.zylearn.maven.mybatisdemo.mybatis_association.vo.OrderDetail">
+	 	select p.proname proname,p.price*po.pcount allprice,po.pcount count from product p,product_order po where p.proid in (select proid from product_order where oid=#{id}) and po.proid=p.proid
+	 </select>
+	 
+   
+</mapper>
