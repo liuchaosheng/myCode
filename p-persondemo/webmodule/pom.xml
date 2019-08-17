@@ -1,0 +1,116 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>club.zylearn.maven.persondemo</groupId>
+    <artifactId>p-persondemo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>webmodule</artifactId>
+  <packaging>war</packaging>
+  <name>persondemo项目的web模块</name>
+  <description>persondemo项目的web模块</description>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>junit</groupId>
+  		<artifactId>junit</artifactId>
+  		<scope>test</scope>
+  	</dependency>
+  	
+  	<!-- spring核心的依赖 -->
+  		<dependency>
+  			<groupId>org.springframework</groupId>
+  			<artifactId>spring-context</artifactId>
+  		</dependency>
+  		
+  		<!-- spring的aop编程 -->
+  		<dependency>
+  			<groupId>org.springframework</groupId>
+  			<artifactId>spring-aop</artifactId>
+  		</dependency>
+  		
+  		<dependency>
+  			<groupId>org.aspectj</groupId>
+  			<artifactId>aspectjweaver</artifactId>
+  		</dependency>
+  		
+  		<!-- spring的tx编程-->
+  		<dependency>
+  			<groupId>org.springframework</groupId>
+  			<artifactId>spring-tx</artifactId>
+  		</dependency>
+  		
+  		<dependency>
+  			<groupId>org.springframework</groupId>
+  			<artifactId>spring-jdbc</artifactId>
+  		</dependency>
+  		
+  		<dependency>
+  			<groupId>org.springframework</groupId>
+  			<artifactId>spring-orm</artifactId>
+  		</dependency>
+  		
+  		<!-- spring-test的支持 -->
+  		<dependency>
+  			<groupId>org.springframework</groupId>
+  			<artifactId>spring-test</artifactId>
+  		</dependency>
+  		
+  		<!-- spring的web编程-->
+  		<dependency>
+  			<groupId>org.springframework</groupId>
+  			<artifactId>spring-web</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework</groupId>
+  			<artifactId>spring-webmvc</artifactId>
+  		</dependency>
+  		
+		<!-- tomcat servlet的依赖包 -->
+  		<dependency>
+  			<groupId>javax.servlet</groupId>
+  			<artifactId>servlet-api</artifactId>
+  			<scope>provided</scope>
+  		</dependency>
+  		
+  		<dependency>
+  			<groupId>javax.servlet</groupId>
+  			<artifactId>jsp-api</artifactId>
+  			<scope>provided</scope>
+  		</dependency>
+  		
+  		<!-- mybatis的支持 -->
+  		<dependency>
+  			<groupId>org.mybatis</groupId>
+  			<artifactId>mybatis</artifactId>
+  		</dependency>
+  		
+  		<!-- mybatis和spring整合的适配器 -->
+  		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis-spring</artifactId>
+		</dependency>
+		
+		<!-- mysql数据库驱动 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		
+		<!-- c3p0数据源  -->
+		<dependency>
+		    <groupId>com.mchange</groupId>
+		    <artifactId>c3p0</artifactId>
+		</dependency>
+		
+		<!-- log4j的依赖 -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+  	
+  </dependencies>
+  <build>
+  	<finalName>webmodule</finalName>
+  </build>
+</project>
