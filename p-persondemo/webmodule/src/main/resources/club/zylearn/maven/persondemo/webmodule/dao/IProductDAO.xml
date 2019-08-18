@@ -17,5 +17,9 @@
 	 	update product set count=#{count} where proid=#{proid}
 	 </update>
 	 
+	 <!--public List<Product> findAll() throws Exception;  -->
+	 <select id="findAll" resultType="club.zylearn.maven.persondemo.webmodule.vo.Product">
+	 	select * from product
+	 </select>
    
 </mapper>

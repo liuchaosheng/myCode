@@ -2,6 +2,7 @@ package club.zylearn.maven.persondemo.webmodule.vo;
 
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Person implements Serializable {
@@ -13,6 +14,14 @@ public class Person implements Serializable {
 	private String name ;
 	private Double sal ;
 	private Date birthday ;
+	private String birthdayStr;
+	
+	public String getBirthdayStr() {
+		return birthdayStr;
+	}
+	public void setBirthdayStr(String birthdayStr) {
+		this.birthdayStr = birthdayStr;
+	}
 	public Integer getPid() {
 		return pid;
 	}
@@ -45,8 +54,8 @@ public class Person implements Serializable {
 	}
 	@Override
 	public String toString() {
-		//String birthdayStr = new SimpleDateFormat("yyyy-MM-dd").format(this.birthday) ;
-		return "Person [pid=" + pid + ", age=" + age + ", name=" + name + ", sal=" + sal + ", birthday=" + birthday
+		birthdayStr = new SimpleDateFormat("yyyy-MM-dd").format(this.birthday) ;
+		return "Person [pid=" + pid + ", age=" + age + ", name=" + name + ", sal=" + sal + ", birthday=" + birthdayStr
 				+ "]";
 	}
 }

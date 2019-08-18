@@ -5,12 +5,13 @@
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
-		http://mybatis.org/schema/mybatis-spring
-        http://mybatis.org/schema/mybatis-spring.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- 配置bean的扫描包 -->
 	<context:component-scan base-package="club.zylearn.maven.persondemo">
@@ -47,5 +48,17 @@
 	
 	<!-- 配置mybatis适配器自动注入包  -->
 	<mybatis:scan base-package="club.zylearn.maven.persondemo.webmodule.dao"/>
+	
+	<!-- 启动自定义类型转换  -->
+	<mvc:annotation-driven conversion-service="conversionService" />  
+	
+	<!-- 自定义的参数跟类型转换的FactoryBean  -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">    
+        <property name="converters">    
+            <list>    
+                <bean class="club.zylearn.maven.persondemo.webmodule.converter.DateConverter" />    
+            </list>    
+        </property>
+	</bean> 
 
 </beans>

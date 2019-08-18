@@ -32,8 +32,8 @@ public class PersonDAOImpl implements IPersonDAO {
 		ps.setTimestamp(3, new Timestamp(vo.getBirthday().getTime()));
 		ps.setDouble(4, vo.getSal());
 		int count = ps.executeUpdate() ;
-		throw new RuntimeException("我的异常") ;
-//		return false ;
+//		throw new RuntimeException("我的异常") ;
+		return false ;
 	}
 
 	@Override

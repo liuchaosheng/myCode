@@ -37,9 +37,12 @@ public class Main {
 //			e.printStackTrace();
 //		}
 		
-		Person vo = service.queryOne(50) ;
-		System.out.println(vo) ;
+//		Person vo = service.queryOne(50) ;
+//		System.out.println(vo) ;
 		
+//		System.getProperties().list(System.out);
+		MyProp prop = (MyProp) context.getBean("proper");
+		System.out.println(prop);
 	}
 	
 	

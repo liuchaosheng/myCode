@@ -25,11 +25,16 @@
 	<bean name="dataSource" class="club.zylearn.maven.springdemo.sdemoaop.datasource.MyDataSource">
 		<property name="driverName" value="${driverName}"></property>
 		<property name="url" value="${url}"></property>
-		<property name="username" value="${username}"></property>
+		<property name="username" value="${user}"></property>
 		<property name="password" value="${password}"></property>
 	</bean>
 	
 	<!-- <bean name="test" class="club.zylearn.maven.springdemo.sdemoaop.service.impl.PersonServiceImpl"></bean> -->
+	
+	<bean name="proper" class="club.zylearn.maven.springdemo.sdemoaop.vo.MyProp">
+		<property name="username" value="${username}"></property>
+		<property name="encoding" value="${file.encoding}"></property>
+	</bean>
 	
 	
 	

@@ -15,12 +15,13 @@ public class DemoTx {
 		IPersonService personService = ac.getBean("personServiceImpl", IPersonService.class) ;
 		System.out.println(personService.getClass().getName()) ;
 		Person vo = new Person() ;
+		vo.setPid(224);
 		vo.setAge(300);
 		vo.setName("liu-chaosheng");
 		vo.setBirthday(new Date());
-		vo.setSal(12.0);
+		vo.setSal(333333.3);
 		try {
-			personService.add(vo) ;
+			personService.edit(vo) ;
 		} catch (Exception e) {
 //			e.printStackTrace();
 		}

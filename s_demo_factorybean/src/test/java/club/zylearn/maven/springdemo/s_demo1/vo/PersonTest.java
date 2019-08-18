@@ -16,6 +16,9 @@ public class PersonTest {
 		System.out.println(person2);
 		System.out.println(car1);
 		System.out.println("\t所属人：" + car1.getPerson());
+		
+		Car car2 = context.getBean("car2",Car.class);
+		System.out.println(car2);
 	}
 
 }

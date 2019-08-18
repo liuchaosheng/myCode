@@ -91,7 +91,8 @@ public class MyDataSource implements DataSource {
 
 	@Override
 	public Connection getConnection() throws SQLException {
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/demo","root","root") ;
+		System.out.println(this.url + this.username + this.password);
+		return DriverManager.getConnection(this.url,this.username,this.password) ;
 	}
 
 	@Override
