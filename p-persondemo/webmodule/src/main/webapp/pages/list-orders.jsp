@@ -10,30 +10,30 @@
 <head>
 <meta charset="UTF-8">
 <base href="<%=basePath %>">
-<title>所有人员</title>
+<title>所有订单</title>
 </head>
 <body>
 	<table border="1" cellspacing="0" cellpadding="5">
 		<tr>
-			<td>编号</td>
-			<td>姓名</td>
-			<td>年龄</td>
-			<td>工资</td>
-			<td>生日</td>
-			<td>操作</td>
+			<td>订单编号</td>
+			<td>创建时间</td>
+			<td>总价</td>
+			<td>下单人</td>
+			<td>详情</td>
 		<tr>
-		<c:forEach items="${persons }"  var="person">
+		<c:forEach items="${allOrders }"  var="order">
 			<tr>
-				<td>${person.pid }</td>
-				<td>${person.name }</td>
-				<td>${person.age }</td>
-				<td>${person.sal }</td>
-				<td>${person.birthdayStr }</td>
-				<td><a href="orders/preadd?pid=${person.pid }">下订单</a></td>
+				<td>${order.oid }</td>
+				<td>${order.createTimeStr }</td>
+				<td>${order.allPrice }</td>
+				<td>${order.person.name }</td>
+				<td>
+					<c:forEach items="${order.orderDetails }" var="orderDetail">
+						<li>产品名：${orderDetail.proname }，数量：${orderDetail.count }</li>
+					</c:forEach>
+				</td>
 			<tr>
 		</c:forEach>
 	</table>
-	<br><br><br>
-	<a href="index.jsp">主页</a>
 </body>
 </html>

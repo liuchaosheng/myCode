@@ -50,7 +50,10 @@
 	<mybatis:scan base-package="club.zylearn.maven.persondemo.webmodule.dao"/>
 	
 	<!-- 启动自定义类型转换  -->
-	<mvc:annotation-driven conversion-service="conversionService" />  
+	<mvc:annotation-driven conversion-service="conversionService" /> 
+	
+	<!-- 静态资源 -->
+	<mvc:default-servlet-handler/>
 	
 	<!-- 自定义的参数跟类型转换的FactoryBean  -->
 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">    

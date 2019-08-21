@@ -21,5 +21,13 @@
 	 <select id="findAll" resultType="club.zylearn.maven.persondemo.webmodule.vo.Product">
 	 	select * from product
 	 </select>
+	 
+	 <!-- public Map<Integer,Product> findByIds(Set<Integer> ids) throws Exception; -->
+	 <select id="findByIds" resultType="club.zylearn.maven.persondemo.webmodule.vo.Product">
+	 	select * from product where proid in 
+	 	<foreach collection="list" item="proid" open="(" close=")" separator=",">
+	 		#{proid}
+	 	</foreach>
+	 </select>
    
 </mapper>

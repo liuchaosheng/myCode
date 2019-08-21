@@ -6,8 +6,29 @@ import java.util.List;
 
 public class Orders {
 	private Integer oid ;
-	private Double allprice ;
+	private Double allPrice ;
 	private Date createTime ;
+	private String createTimeStr;
+	public String getCreateTimeStr() {
+		return createTimeStr;
+	}
+	public void setCreateTimeStr(String createTimeStr) {
+		this.createTimeStr = createTimeStr;
+	}
+	public List<OrderDetail> getOrderDetails() {
+		return orderDetails;
+	}
+	public void setOrderDetails(List<OrderDetail> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+	private Person person; // 订单所属人
+	
+	public Person getPerson() {
+		return person;
+	}
+	public void setPerson(Person person) {
+		this.person = person;
+	}
 	private List<OrderDetail> orderDetails;
 	public List<OrderDetail> getOrderDetials() {
 		return orderDetails;
@@ -21,20 +42,23 @@ public class Orders {
 	public void setOid(Integer oid) {
 		this.oid = oid;
 	}
-	public Double getAllprice() {
-		return allprice;
+	public Double getAllPrice() {
+		return allPrice;
 	}
-	public void setAllprice(Double allprice) {
-		this.allprice = allprice;
+	public void setAllPrice(Double allPrice) {
+		this.allPrice = allPrice;
 	}
 	public Date getCreateTime() {
 		return createTime;
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+		if(createTime != null) {
+			this.createTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(createTime);
+		}
 	}
 	@Override
 	public String toString() {
-		return "订单 [编号=" + oid + ", 总价=" + allprice + ", 创建时间=" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(createTime) + "]";
+		return "订单 [编号=" + oid + ", 总价=" + allPrice + ", 创建时间=" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(createTime) + "]";
 	}
 }

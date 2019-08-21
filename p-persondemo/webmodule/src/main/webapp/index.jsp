@@ -12,7 +12,7 @@
 <title>主页</title>
 </head>
 <body>
-	<h3>测试页面</h3>
+	<h3>测试主页面</h3>
 	<form action="product/add" method="post">
 		名称：<input type="text" name="proname" id="proname"><br>
 		原价：<input type="text" name="oriprice" id="oriprice"><br>
@@ -35,5 +35,7 @@
 	<a href="product/list">产品列表</a>
 	<br><br><br>
 	<a href="person/list">人员列表</a>
+	<br><br><br>
+	<a href="orders/list">订单列表</a>
 </body>
 </html>
