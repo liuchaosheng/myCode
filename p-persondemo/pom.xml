@@ -49,6 +49,12 @@
   			<version>${spring.version}</version>
   		</dependency>
   		
+  		<dependency>
+  			<groupId>org.aspectj</groupId>
+  			<artifactId>aspectjweaver</artifactId>
+  			<version>1.8.13</version>
+  		</dependency>
+  		
   		<!-- spring的tx编程-->
   		<dependency>
   			<groupId>org.springframework</groupId>
@@ -81,12 +87,6 @@
   		</dependency>
   		
   		<dependency>
-  			<groupId>org.aspectj</groupId>
-  			<artifactId>aspectjweaver</artifactId>
-  			<version>1.8.13</version>
-  		</dependency>
-  		
-  		<dependency>
   			<groupId>log4j</groupId>
   			<artifactId>log4j</artifactId>
   			<version>${log4j}</version>
@@ -105,6 +105,7 @@
 		    <version>1.3.2</version>
 		</dependency>
   		
+  		<!-- 引入tomcat的servlet-api和jsp-api -->
   		<dependency>
   			<groupId>javax.servlet</groupId>
   			<artifactId>servlet-api</artifactId>
@@ -159,6 +160,7 @@
             <version>1.2</version>
         </dependency>
         
+        <!-- 引入cglib的依赖包  -->
         <dependency>
 		    <groupId>cglib</groupId>
 		    <artifactId>cglib</artifactId>
@@ -192,9 +194,15 @@
   	<finalName>p-persondemo</finalName>
   </build>
   
-  
+  <!--  子项目模块-->
   <modules>
   	<module>webmodule</module>
   	<module>tx_demo</module>
+  	<module>mvc-hello</module>
+  	<module>mvc-requestMapping</module>
+  	<module>param_header_cookie</module>
+  	<module>mvc-modelAndView</module>
+  	<module>mvc-modelAttribute</module>
   </modules>
+  
 </project>

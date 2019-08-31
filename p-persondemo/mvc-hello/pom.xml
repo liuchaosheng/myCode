@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>club.zylearn.maven.persondemo</groupId>
+    <artifactId>p-persondemo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>mvc-hello</artifactId>
+  <packaging>war</packaging>
+  <name>mvc-helloworld项目</name>
+  <description>mvc-helloworld项目</description>
+  
+  <dependencies>
+  		<!-- spring核心的依赖 -->
+ 		<!-- <dependency>
+ 			<groupId>org.springframework</groupId>
+ 			<artifactId>spring-context</artifactId>
+ 		</dependency> -->
+ 		
+ 		<!-- spring的aop编程 -->
+  		<!-- <dependency>
+  			<groupId>org.springframework</groupId>
+  			<artifactId>spring-aop</artifactId>
+  		</dependency>
+  		
+  		<dependency>
+  			<groupId>org.aspectj</groupId>
+  			<artifactId>aspectjweaver</artifactId>
+  		</dependency> -->
+  		
+  		<!-- spring的web编程-->
+  		<!-- <dependency>
+  			<groupId>org.springframework</groupId>
+  			<artifactId>spring-web</artifactId>
+  		</dependency> -->
+  		<dependency>
+  			<groupId>org.springframework</groupId>
+  			<artifactId>spring-webmvc</artifactId>
+  		</dependency>
+  		
+  		<dependency>
+  			<groupId>javax.servlet</groupId>
+  			<artifactId>jsp-api</artifactId>
+  			<scope>provided</scope>
+  		</dependency>
+  		
+  		<dependency>
+  			<groupId>commons-logging</groupId>
+  			<artifactId>commons-logging</artifactId>
+  		</dependency>
+ 		
+  </dependencies>
+  
+  <build>
+  	<finalName>hello</finalName>
+  </build>
+  
+</project>

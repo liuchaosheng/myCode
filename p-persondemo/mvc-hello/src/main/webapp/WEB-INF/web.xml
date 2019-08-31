@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+	http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>mvc-hello</display-name>
+  
+  <!-- 配置spring-mvc的全局控制器 -->
+	<servlet>
+		<servlet-name>springDispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<!-- 配置servlet的初始化参数，该参数将是其创建bean容器的路径 -->
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:applicationContext.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- 配置spring-mvc的映射路径 
+		因为tomcat本身对路径的匹配顺序是 全路径匹配（如：http://localhost:8080/myapp/person/add）
+															模糊路径匹配：（如：http://localhost:8080/myapp/person/*）
+															后缀名匹配：（如：*.jsp）
+															交给  "/"的Servlet处理（比如DispatcherServlet）
+	-->
+	<servlet-mapping>
+		<servlet-name>springDispatcherServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+  
+</web-app>
