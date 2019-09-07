@@ -9,7 +9,7 @@ public class Demo1 {
 	public static void main(String[] args) throws Exception {
 		IPersonDAO personDAO = MyLocalSqlSessionFactory.getLocalSqlSession().getMapper(IPersonDAO.class) ;
 		try {
-			Person vo = personDAO.findByIdUseResultMap(10) ;
+			Person vo = personDAO.findByIdUseResultMap(226) ;
 			System.out.println("=======================================");
 			System.out.println(vo);
 			System.out.println("=======================================");

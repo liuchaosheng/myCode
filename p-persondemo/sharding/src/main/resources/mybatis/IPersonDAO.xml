@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="club.zylearn.sharding.dao.IPersonDAO">
+   <!-- public int doCreate(Person vo) throws DataAccessException;
+   	sql中多了占位符tableName需要在拦截器中设置，因为只是传入了vo参数
+   -->
+   <insert id="doCreate">
+   		insert into tableName(id,pname,age,note) values(#{id},#{pname},#{age},#{note})
+   </insert>
+   
+   <!-- public Person findById(Long id) throws DataAccessException; -->
+   <select id="findById" resultType="club.zylearn.sharding.vo.Person">
+		select * from tableName where id=#{id}
+   </select>
+   
+   <!-- public int doUpdate(Person vo) throws DataAccessException; -->
+   <update id="doUpdate">
+   		update tableName set pname=#{pname},age=#{age},note=#{note} where id=#{id}
+   </update>
+
+</mapper>

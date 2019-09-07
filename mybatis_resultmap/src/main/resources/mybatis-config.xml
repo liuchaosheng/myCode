@@ -8,7 +8,7 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	<!-- 配置多个环境信息 -->
-  <environments default="dev_oracle">
+  <environments default="dev_mysql">
   	<!-- mysql环境 -->
     <environment id="dev_mysql">
       <transactionManager type="JDBC"/>

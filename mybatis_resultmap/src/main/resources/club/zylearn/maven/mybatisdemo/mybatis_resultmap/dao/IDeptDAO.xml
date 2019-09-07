@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="club.zylearn.maven.mybatisdemo.mybatis_resultmap.dao.IDeptDAO">
+	<!-- 
+	public Dept findById(Integer deptno);
+	public List<Dept> findAll();
+	 -->
+	 <select id="findById" resultType="club.zylearn.maven.mybatisdemo.mybatis_resultmap.vo.Dept">
+	 	select * from dept where deptno=#{deptno}
+	 </select>
+	<select id="findAll" resultType="club.zylearn.maven.mybatisdemo.mybatis_resultmap.vo.Dept">
+		select * from dept
+	</select>   
+	<!-- public Dept findByIdDeep(Integer deptno); -->
+	<resultMap type="club.zylearn.maven.mybatisdemo.mybatis_resultmap.vo.Dept" id="deepDept">
+		<id column="deptno" property="deptno"/>
+		<result column="dname" property="dname"/>
+		<result column="loc" property="loc"/>
+		<collection property="emps" 
+			select="club.zylearn.maven.mybatisdemo.mybatis_resultmap.dao.IEmpDAO.findEmpsByDeptno"
+			ofType="club.zylearn.maven.mybatisdemo.mybatis_resultmap.vo.Emp"
+			column="deptno">
+		</collection>
+	</resultMap>
+	<select id="findByIdDeep" resultMap="deepDept">
+		select * from dept where deptno=#{deptno}
+	</select>
+	
+	<!-- public List<Dept> findAllDeep(); -->
+	<select id="findAllDeep" resultMap="deepDept">
+		SELECT * from dept
+	</select>
+	
+</mapper>
