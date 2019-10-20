@@ -25,15 +25,15 @@ public class ServiceAddTest {
 	
 	@Test
 	public void test02() {
-		System.out.println(personService.getOne(1567874659039L));
+		System.out.println(personService.getOne(1567872448860L));
 	}
 	
 	@Test
 	public void test03() {
 		Person person = new Person();
-		person.setId(1567872419835L);
+		person.setId(1567872433539L);
 		person.setPname("张三");
-		person.setAge(31);
+		person.setAge(55);
 		person.setNote("挂羊头卖狗肉的沙子");
 		personService.edit(person);
 	}

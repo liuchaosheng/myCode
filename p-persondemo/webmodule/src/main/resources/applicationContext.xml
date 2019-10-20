@@ -50,7 +50,7 @@
 	<mybatis:scan base-package="club.zylearn.maven.persondemo.webmodule.dao"/>
 	
 	<!-- 启动自定义类型转换  -->
-	<mvc:annotation-driven conversion-service="conversionService" /> 
+	<mvc:annotation-driven conversion-service="conversionService" />
 	
 	<!-- 静态资源 -->
 	<mvc:default-servlet-handler/>
@@ -59,7 +59,7 @@
 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">    
         <property name="converters">    
             <list>    
-                <bean class="club.zylearn.maven.persondemo.webmodule.converter.DateConverter" />    
+                <bean class="club.zylearn.maven.persondemo.webmodule.converter.DateConverter" />
             </list>    
         </property>
 	</bean> 

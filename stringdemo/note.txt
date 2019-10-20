@@ -1,0 +1,76 @@
+本例主要演示了jvm的类加载全过程和String类的使用。
+研究有助于jvm的运行过程。
+研究有助于理解java的动态性、了解热部署、动态加载这些概念和提高程序的灵活性。
+
+1、类加载的过程：
+（1）加载  静态二进制数据==》内存中。
+（2）链接  为常量符号赋值，将静态二进制数据动态化，为标识符分配地址。
+（3）初始化  静态域 + 静态块 组合 cinit  生成Class对象（包含类的基本信息）。
+类加载的过程是同步的。
+所以来的加载无非就是为符号赋值和初始化Class对象的过程。
+
+2、初始化的时机：
+（1）主动引用（会发生类的初始化，也就是说产生Class对象）：
+new关键字实例化一个对象。 比如： Person person = new Person();
+调用类的静态成员和静态方法（除了final常量）。比如： System.out.println(A.MSG); // 不会触发A类的初始化
+class A{
+	public static final String MSG = "hello java";  // 会被放入到类的常量池中。
+	public static String msg = "ssss";  // 触发A类的初始化
+}
+反射调用。 Class<?> cla = Person.class;  // 触发类的初始化
+虚拟机启动会初始化main所在类。  
+父类优先被初始化。  比如：
+class Person{
+	static{
+		System.out.println("Person类的初始化");   // 先执行
+	}
+}
+class Stu extends Person{
+	static{
+		System.out.println("Stu的静态初始化");
+	}
+}
+
+（2）被动引用（不会发生类的初始化，也就是说不会产生Class对象）：
+当访问一个静态域的时候，只有真正声明这个域的类才被初始化。
+	如：子类引用了父类的静态域，则子类不会初始化，而会初始化父类。
+通过数组定义类的引用不会初始化该类。
+引用常量不会触发此类的初始化。
+
+
+3、类加载器
+关系：
+bootstrap class loader <===== extensions class loader  <====  application class loader(system class loader)
+(用于加载jdk的核心包rt.jar)         （加载ext/*.jar）                             （加载classpath下的类）
+上述继承关系是通过组合来实现的。
+（使用双亲委托机制来加载类）
+而java中如果要自定义类加载器，则需要继承ClassLoader类。
+自定义的类加载器需要继承ClassLoader抽象类，该抽象类中默认将application class loader设置为父加载器。
+同时也提供了loadClass和defineClass两个方法供子类使用。
+
+4、双亲加载存在的问题：
+（1）通过setContextClassLoader()和getContextClassLoader()。
+（2）tomcat为每个web-app都使用了一个独立的类加载器。
+（3）OSGI 技术也是使用了多个类加载器  面向JAVA的动态模块系统。
+每个组件都有独立的类加载器，然后通过声明导出自己的包和类，其他模块通过声明导入的方式引入
+别的组件的包和类。
+
+
+5、下面是自己研究的一下扩展知识：
+（1）.class文件的大概内容
+常量池和方法字节码：
+常量池中保存的是所有出现的类名、成员变量名、符号引用（比如对方法和成员变量的引用）。
+比如：
+字符串常量
+类名
+成员变量名   ==》  字符串信息存储
+
+符号引用：具有特点含义的符号，以及其引用的常量
+
+
+方法字节码存放类中方法的字节码信息。
+
+
+
+
+

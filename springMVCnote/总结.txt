@@ -1,0 +1,141 @@
+回顾尚硅谷的springMVC课程：
+1、springMVC的helloworld程序：
+（1）引入jar包。spring核心四个包。
+spring-web/spring-mvc包。
+或者spring直接使用maven配置spring-mvc。
+（2）web.xml中配置DispatcherServlet，并配置url-pattern为/
+和contextConfigLocation配置为spring容器的位置。
+（3）如果需要跳转视图，则需要配置：
+	<!-- 配置视图解析器  -->
+	<bean name="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/pages/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+视图解析器。
+
+2、@RequestMapping注解用于设置请求到控制器的映射。
+可以设置请求method,header,参数等信息。
+
+3、@RequestParam注解用于将传递的参数映射到控制器的参数上。
+
+4、@RequestHeader注解用于映射请求头信息到控制器的参数上。
+
+5、@CookieValue注解用于将cookie值映射到控制器方法上。
+
+6、pojo对象作为控制器的参数的时候，spring-mvc自动填充属性值，支持级联属性。
+
+7、可以使用servlet的原生的api作为控制器的参数。
+HttpServletRequest,HttpServletResponse,HttpSession,java.security.Principal
+Locale,InputStream,OutputStream,Reader,Writer。
+
+8、ModelAndView类，模型和视图。
+不管控制器方法返回什么值，mvc都会构造一个ModelAndView对象。
+在方法中可以向该对象中加入域值。
+在mvc中一旦控制器方法执行结束后，会将model中的域值一个一个放到request域中。
+
+9、Map,ModelMap和Model接口都将被mvc框架的类ExtendedModelMap类实现。
+所以入参中不管是map还是model都会传入ExtendedModelMap的实例。
+
+10、@SessionAttributes注解。放在控制器上。
+那么该控制器类的每一个方法执行后，会将model中的key对应的对象放入到session域中。
+
+11、@ModelAttribute注解该注解，是在目标方法执行前，用于准备model的。
+（该类每个目标方法执行前都会执行@ModelAttribute标记的方法）
+
+12、@ModelAttribute的原理是什么？
+一直没有懂的东西。
+（备注：可以在@ModelAttribute方法中将某个对象放入模型数据中，然后在目标方法中什么也
+不做，然后观察页面是否能取得该模型对象。）
+
+13、运行流程验证：@ModelAttribute和目标方法执行
+也就是说给目标方法传入参数的时候先去上下文model中查询key。
+如果有，则不需要重新创建，然后再绑定表单的值。
+（1）给目标方法传递pojo的时候，先确定key，如果attrName(由参数上的@ModelAttribute注解标识)
+为"",则取类名首字母小写。
+（2）通过key去确定target。
+若implicitModel中包含对应的key，则返回。
+若不包含该key，则判断当前控制器是否被@SessionAttribute修饰，如果是，则尝试从Session中找key
+对应的值，找不到，则抛出异常。若不是，则执行（3）
+（3）创建新对象，然后绑定表单的值。
+（4）将attrName和target放入到implicitModel中。备注：该处仍然需要验证。
+上述的流程也决定了pojo参数确定的规则。
+
+如何解决@SessionAttributes异常的问题。
+必须有@ModelAttribute标注的方法提供key。
+或者使用@ModelAttribute修饰入参，来确定key。
+
+14、关于试图解析器的解析过程的分析：
+无论目标方法返回的是View/String/ModelAndView，那么内部在处理的时候都会返回ModelAndView对象。
+然后通过视图名称去获取View，然后进行渲染，InternalResourceView是使用了RequestDispatcher来。
+ViewResolver接口用来解析视图，将逻辑视图转化成物理视图。
+
+15、<mvc:view-controller path="" view-name="" /> 用于直接配置某个视图，无需再进过控制器处理了。
+（但是会影响其他控制器的使用）
+可以通过<mvc:annotation-driven></mvc:annotation-driven>
+
+16、自定义视图。整合excel或者jfreeChar的方式。BeanNameViewResolver等。
+常用的视图解析器放在后边，order属性来定义视图解析器的优先级。值越小，优先级越高。
+
+17、重定向和服务器跳转。
+
+18、RESTful风格的架构形式：面向资源的架构，没有view，model的概念，只有数据的概念。
+配置HiddenHttpMethodFilter可以进行请求方法的分解：get,post,put,delete。
+
+19、mvc进行数据类型格式化和转换：
+DataBinder<==WebDataBinder类的作用：通过mvc上下文中的ConversionService进行数据类型的转换和格式化。
+Validator进行数据校验。
+
+配置自定义的类型转换器：
+<mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
+<bean id="conversionService" class="">
+	<property name="converters">
+		<set>
+			<ref bean=""/>
+		</set>
+	</property>
+</bean>
+
+20、<mvc:annotation-driven>注解的使用。（解决了<mvc:default-servlet-handler />和<mvc:view-controller
+报告异常的问题 ）
+该注解的作用：
+（1）自动注册RequestMappingHandlerMapping，RequestMappingHandlerAdapter，ExceptionHandlerExceptionResolver
+支持ConversionService实例对表单参数进行转换（若没有配置则ConversionService为空，只能进行基本类型的转换）
+若配置了<mvc:default-servlet-handler />而没有配置<mvc:annotation-driven>，
+那么就无法处理@RequestMapping的请求了。
+
+@DataTimeFormat，@NumberFormatannotation完成数据类型的格式化。
+@Valid对Bean进行JSR303的验证。
+支持@RequestBody和@ResponseBody的使用。
+自动配置LocalValidatorFactoryBean进行数据校验。
+
+21、@InitBinder可以对WebDataBinder对象进行自定义的初始化，来改变WebDataBinder的行为。
+
+22、格式化：手动配置FormattingConversionServiceFactoryBean可以使用格式化功能，也可以使用自定义的converter。
+一旦类型转换失败或者校验失败，则会将结果放入到BindingResult中，该对象可以直接传入目标方法的入参中，
+从而判断是否继续往下执行。
+
+23、数据校验。
+JSR303的提供的标准框架。Hibernate Validator进行了实现。
+操作步骤：
+jar包。
+入参上加上@Valid注解进行校验。（备注：此时BindingResult参数必须放在入参的后一个参数）
+
+24、处理json数据。
+前端使用application/json传输数据
+或者后台需要传递给前端json数据格式。
+本质上是通过HttpMessageConverter<T>来进行转换的。
+（备注：具体的涉及到的注解有哪些呢？分别是什么含义？）
+
+25、关于文件上传使用CommonsMultipartResolver来。（需要手动配置）
+并配置jar包。commons-fileupload,commons-io
+
+26、处理异常：
+使用HandlerExceptionResolver接口来处理。
+@ExceptionHandler来处理。
+
+
+
+
+
+
+
