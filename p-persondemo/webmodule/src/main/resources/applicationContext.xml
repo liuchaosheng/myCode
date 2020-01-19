@@ -55,6 +55,7 @@
 	<!-- 静态资源 -->
 	<mvc:default-servlet-handler/>
 	
+	
 	<!-- 自定义的参数跟类型转换的FactoryBean  -->
 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">    
         <property name="converters">    

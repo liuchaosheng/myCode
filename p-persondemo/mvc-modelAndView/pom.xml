@@ -33,10 +33,10 @@
 		    <artifactId>standard</artifactId>
 		</dependency>
 		
-		<dependency>
+		<!-- <dependency>
             <groupId>javax.servlet.jsp.jstl</groupId>
             <artifactId>jstl-api</artifactId>
-        </dependency>
+        </dependency> -->
         
   </dependencies>
   
